@@ -1,0 +1,9 @@
+server:
+   port: 8085
+   
+spring:
+   data:
+      mongodb:
+         database: robot-pollution-data
+         host: localhost
+         port: 27017
