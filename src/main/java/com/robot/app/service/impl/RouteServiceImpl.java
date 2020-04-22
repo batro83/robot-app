@@ -12,6 +12,11 @@ import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.LatLng;
 import com.robot.app.service.RouteService;
 
+/**
+ * Service about robot's routes
+ * @author batro
+ *
+ */
 @Service
 public class RouteServiceImpl implements RouteService {
 

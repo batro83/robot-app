@@ -10,6 +10,11 @@ import com.robot.app.dao.ReadDao;
 import com.robot.app.model.Read;
 import com.robot.app.service.ReadService;
 
+/**
+ * Service to collect and manage pollution reads
+ * @author batro
+ *
+ */
 @Service
 public class ReadServiceImpl implements ReadService {
 
