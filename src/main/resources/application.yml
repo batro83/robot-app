@@ -7,3 +7,7 @@ spring:
          database: robot-pollution-data
          host: localhost
          port: 27017
+
+robot:
+   speed: 1
+   meters-collect: 100 

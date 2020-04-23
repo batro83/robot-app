@@ -16,24 +16,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableScheduling
 public class AppConfig {
 
-	@Bean(name="processExecutor")
+	@Bean(name = "singleThreaded")
 	public TaskExecutor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(1);
-		executor.setMaxPoolSize(10);
-		executor.setQueueCapacity(25);
-		executor.setThreadNamePrefix("Custom-Executor");
+		executor.setThreadNamePrefix("Process-Single-Executor");
 		return executor;
 	}
-	
+
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
-	
+
 	@Bean
 	public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
-	       return builder
-	               .build();
+		return builder.build();
 	}
 }

@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.maps.model.LatLng;
+import com.robot.app.config.RobotConfig;
 import com.robot.app.model.Read;
 import com.robot.app.service.ReadService;
 import com.robot.app.service.RouteService;
@@ -30,18 +31,22 @@ public class ProcessServiceTest {
 	@Mock
 	private RouteService routeService;
 	@Mock
+	private RobotConfig robotConfig;
+	@Mock
 	private ReadService readService;
 	@InjectMocks
 	private ProcessServiceImpl processService;
 
 	@Test
-	public void test001_process_ok() {
+	public void test001_process_ok() throws InterruptedException {
 		List<LatLng> mockList = new ArrayList<>(); 
 		mockList.add(new LatLng());
 		mockList.add(new LatLng());
 		
 		when(routeService.getRouteLocationList(any())).thenReturn(mockList);
 		when(routeService.getDistanceBetweenPolylines(any(), any())).thenReturn(101f);
+		when(robotConfig.getMetersCollect()).thenReturn(100f);
+		when(robotConfig.getSpeed()).thenReturn(0f);
 
 		processService.process("polyline");
 
@@ -49,8 +54,9 @@ public class ProcessServiceTest {
 	}
 	
 	@Test
-	public void test002_process_NoPositionList() {
-				
+	public void test002_process_NoPositionList() throws InterruptedException {
+		when(robotConfig.getMetersCollect()).thenReturn(100f);
+		when(robotConfig.getSpeed()).thenReturn(0f);
 		when(routeService.getRouteLocationList(any())).thenReturn(Collections.emptyList());
 		when(routeService.getDistanceBetweenPolylines(any(), any())).thenReturn(101f);
 

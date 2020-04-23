@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.google.maps.model.LatLng;
+import com.robot.app.config.RobotConfig;
 import com.robot.app.model.Read;
 import com.robot.app.service.ProcessService;
 import com.robot.app.service.ReadService;
@@ -16,6 +17,7 @@ import com.robot.app.service.RouteService;
 
 /**
  * Service to simulate the robot
+ * 
  * @author batro
  *
  */
@@ -26,24 +28,31 @@ public class ProcessServiceImpl implements ProcessService {
 	private RouteService routeService;
 	@Autowired
 	private ReadService readService;
+	@Autowired
+	private RobotConfig robotConfig;
 
-	@Async("processExecutor")
+	@Async("singleThreaded")
 	@Override
-	public void process(String polyline) {
+	public void process(String polyline) throws InterruptedException {
 		float counterMeters = 0f;
 		List<LatLng> routeList = routeService.getRouteLocationList(polyline);
-
 		LatLng prevPosition = null;
 		for (int i = 0; i < routeList.size(); i++) {
 			LatLng actualPosition = routeList.get(i);
 			float distance = routeService.getDistanceBetweenPolylines(actualPosition, prevPosition);
 			counterMeters += distance;
-			if (counterMeters >= 100) {
+			if (counterMeters >= robotConfig.getMetersCollect()) {
 				readService.saveRead(collectData(actualPosition));
 				counterMeters = 0f;
 			}
 			prevPosition = actualPosition;
+			Thread.sleep((long) (distance * robotConfig.getSpeed() * 100));
 		}
+	}
+
+	@Override
+	public void stop() {
+
 	}
 
 	private Read collectData(LatLng position) {

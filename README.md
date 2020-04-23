@@ -1,9 +1,22 @@
-# Read Me First
-The following was discovered as part of building this project:
+# README
 
-* The original package name 'com.api.rest.robot-service' is invalid and this project uses 'com.api.rest.robotservice' instead.
+Api rest to control robot collector.
 
 # Getting Started
+
+There is and endpoint to start de robot. Then the robot begins the route saving pollution reads, and every 15 minutes the robot print the average level of pollution since the last print.
+
+
+## Run with Docker-compose
+
+
+## Stack tech
+
+Springboot  
+Mongo  
+JPA  
+
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:

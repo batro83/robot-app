@@ -12,6 +12,7 @@ import com.robot.app.service.ReadService;
 
 /**
  * Service to collect and manage pollution reads
+ * 
  * @author batro
  *
  */
@@ -29,5 +30,10 @@ public class ReadServiceImpl implements ReadService {
 	@Override
 	public List<Read> getReads(Date timestamp) {
 		return readDao.findByTimestampGreaterThan(timestamp);
+	}
+
+	@Override
+	public List<Read> getAllReads() {
+		return (List<Read>) readDao.findAll();
 	}
 }

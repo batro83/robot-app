@@ -41,4 +41,11 @@ public class ReadServiceTest {
 		readService.getReads(new Date());
 		verify(readDao).findByTimestampGreaterThan(any());		
 	}
+	
+	@Test
+	public void test003_allReads_ok() {
+		when(readDao.findAll()).thenReturn(Collections.emptyList());
+		readService.getAllReads();
+		verify(readDao).findAll();		
+	}
 }
