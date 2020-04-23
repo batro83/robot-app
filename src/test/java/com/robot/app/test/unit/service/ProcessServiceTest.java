@@ -45,8 +45,7 @@ public class ProcessServiceTest {
 		
 		when(routeService.getRouteLocationList(any())).thenReturn(mockList);
 		when(routeService.getDistanceBetweenPolylines(any(), any())).thenReturn(101f);
-		when(robotConfig.getMetersCollect()).thenReturn(100f);
-		when(robotConfig.getSpeed()).thenReturn(0f);
+		
 
 		processService.process("polyline");
 

@@ -1,10 +1,12 @@
-# README
+# ROBOT APP
 
 Api rest to control robot collector.
 
 # Getting Started
 
-There is and endpoint to start de robot. Then the robot begins the route saving pollution reads, and every 15 minutes the robot print the average level of pollution since the last print.
+There is and endpoint '/robot/start' to start the robot. With a valid polyline the robot begins the route saving pollution reads into a mongoDB, and every 15 minutes the robot print the average level of pollution since the last print.
+
+Into the application.yml you can configure the robot such as speed(m/s) and distance(m) between each read.
 
 
 ## Run with Docker-compose
@@ -16,7 +18,7 @@ Springboot
 Mongo  
 JPA  
 
-
+## Improving
 
 ### Reference Documentation
 For further reference, please consider the following sections:
