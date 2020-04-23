@@ -69,5 +69,4 @@ public class ReportTest {
 
 		verify(reportDao, times(0)).save(any());
 	}
-
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ReportDto {
-	
+
 	private Date timestamp;
 
 	private LatLng location;

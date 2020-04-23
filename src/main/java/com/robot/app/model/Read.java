@@ -3,6 +3,7 @@ package com.robot.app.model;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,12 +24,16 @@ public class Read {
 	@Id
 	private String id;
 
+	@NotNull
 	private Date timestamp;
 
+	@NotNull
 	private LatLng location;
 
+	@NotNull
 	private double level;
 
+	@NotNull
 	private String source;
 
 }

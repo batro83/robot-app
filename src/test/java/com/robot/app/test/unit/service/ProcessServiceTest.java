@@ -39,19 +39,18 @@ public class ProcessServiceTest {
 
 	@Test
 	public void test001_process_ok() throws InterruptedException {
-		List<LatLng> mockList = new ArrayList<>(); 
+		List<LatLng> mockList = new ArrayList<>();
 		mockList.add(new LatLng());
 		mockList.add(new LatLng());
-		
+
 		when(routeService.getRouteLocationList(any())).thenReturn(mockList);
 		when(routeService.getDistanceBetweenPolylines(any(), any())).thenReturn(101f);
-		
 
 		processService.process("polyline");
 
 		verify(readService, times(2)).saveRead(any(Read.class));
 	}
-	
+
 	@Test
 	public void test002_process_NoPositionList() throws InterruptedException {
 		when(robotConfig.getMetersCollect()).thenReturn(100f);
