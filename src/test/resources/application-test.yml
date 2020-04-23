@@ -1,0 +1,12 @@
+
+   
+spring:
+   data:
+      mongodb:
+         database: robot-pollution-data-test
+         host: localhost
+         port: 27017
+
+robot:
+   speed: 0
+   meters-collect: 100 

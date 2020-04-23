@@ -3,6 +3,7 @@ package com.robot.app.service.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -33,7 +34,7 @@ public class ProcessServiceImpl implements ProcessService {
 
 	@Async("singleThreaded")
 	@Override
-	public void process(String polyline) throws InterruptedException {
+	public CompletableFuture<Boolean> process(String polyline) throws InterruptedException {
 		float counterMeters = 0f;
 		List<LatLng> routeList = routeService.getRouteLocationList(polyline);
 		LatLng prevPosition = null;
@@ -48,6 +49,7 @@ public class ProcessServiceImpl implements ProcessService {
 			prevPosition = actualPosition;
 			Thread.sleep((long) (distance * robotConfig.getSpeed() * 1000));
 		}
+		return CompletableFuture.completedFuture(true);
 	}
 
 	@Override
