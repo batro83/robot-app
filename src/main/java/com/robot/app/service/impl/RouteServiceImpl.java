@@ -36,7 +36,7 @@ public class RouteServiceImpl implements RouteService {
 	}
 
 	@Override
-	public float getDistanceBetweenPolylines(LatLng position1, LatLng position2) {
+	public float getDistanceBetweenPositions(LatLng position1, LatLng position2) {
 		if (position1 == null || position2 == null) {
 			return 0f;
 		}

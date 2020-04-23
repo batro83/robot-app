@@ -8,5 +8,5 @@ public interface RouteService {
 
 	public List<LatLng> getRouteLocationList(String polyline);
 	
-	public float getDistanceBetweenPolylines(LatLng poly1, LatLng poly2);
+	public float getDistanceBetweenPositions(LatLng poly1, LatLng poly2);
 }

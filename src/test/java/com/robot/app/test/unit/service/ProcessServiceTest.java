@@ -44,7 +44,7 @@ public class ProcessServiceTest {
 		mockList.add(new LatLng());
 
 		when(routeService.getRouteLocationList(any())).thenReturn(mockList);
-		when(routeService.getDistanceBetweenPolylines(any(), any())).thenReturn(101f);
+		when(routeService.getDistanceBetweenPositions(any(), any())).thenReturn(101f);
 
 		processService.process("polyline");
 
@@ -56,7 +56,7 @@ public class ProcessServiceTest {
 		when(robotConfig.getMetersCollect()).thenReturn(100f);
 		when(robotConfig.getSpeed()).thenReturn(0f);
 		when(routeService.getRouteLocationList(any())).thenReturn(Collections.emptyList());
-		when(routeService.getDistanceBetweenPolylines(any(), any())).thenReturn(101f);
+		when(routeService.getDistanceBetweenPositions(any(), any())).thenReturn(101f);
 
 		processService.process("polyline");
 

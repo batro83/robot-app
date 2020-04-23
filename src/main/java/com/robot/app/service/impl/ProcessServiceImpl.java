@@ -39,14 +39,14 @@ public class ProcessServiceImpl implements ProcessService {
 		LatLng prevPosition = null;
 		for (int i = 0; i < routeList.size(); i++) {
 			LatLng actualPosition = routeList.get(i);
-			float distance = routeService.getDistanceBetweenPolylines(actualPosition, prevPosition);
+			float distance = routeService.getDistanceBetweenPositions(actualPosition, prevPosition);
 			counterMeters += distance;
 			if (counterMeters >= robotConfig.getMetersCollect()) {
 				readService.saveRead(collectData(actualPosition));
 				counterMeters = 0f;
 			}
 			prevPosition = actualPosition;
-			Thread.sleep((long) (distance * robotConfig.getSpeed() * 100));
+			Thread.sleep((long) (distance * robotConfig.getSpeed() * 1000));
 		}
 	}
 

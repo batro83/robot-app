@@ -49,7 +49,7 @@ public class RouteServiceTest {
 	public void test003_getDistanceBetweenPolylines_ok() {
 		LatLng pos1 = new LatLng(51.49965, -0.21333);
 		LatLng pos2 = new LatLng(51.5004, -0.21405);
-		float distance = routeService.getDistanceBetweenPolylines(pos1, pos2);
+		float distance = routeService.getDistanceBetweenPositions(pos1, pos2);
 		assertTrue(distance > 0);
 	}
 	
@@ -57,7 +57,7 @@ public class RouteServiceTest {
 	public void test004_getDistanceBetweenPolylines_ko() {
 		LatLng pos1 = new LatLng(51.49965, -0.21333);
 		LatLng pos2 = null;
-		float distance = routeService.getDistanceBetweenPolylines(pos1, pos2);
+		float distance = routeService.getDistanceBetweenPositions(pos1, pos2);
 		assertEquals(0, distance);
 	}
 }
