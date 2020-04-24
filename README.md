@@ -64,8 +64,8 @@ Lombok
 ## Improving
 
 More unit test with monitoring stations.  
-More integration tests.  
-Finish endpoints /stop and /reroute (I'm out of time and this is a little bit trickie).  
+More integration tests, with others robot's config (speed, distance, stations).    
+To finish endpoints /stop and /reroute (I'm out of time and this is a little bit trickie).  
 Send a better exception in case the polyline is invalid.  
 
 
