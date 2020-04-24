@@ -7,7 +7,7 @@ spring:
          host: localhost
          port: 27017
 robot:
-   speed: 1
+   speed: 100
    meters-collect: 100
    monitoring-stations:
    -  lat: 51.501299

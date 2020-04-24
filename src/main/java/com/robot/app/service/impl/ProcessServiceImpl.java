@@ -55,7 +55,7 @@ public class ProcessServiceImpl implements ProcessService {
 				counterMeters = 0f;
 			}
 			prevPosition = actualPosition;
-			Thread.sleep((long) (distance * robotConfig.getSpeed() * 1000));
+			Thread.sleep((long) ((distance / robotConfig.getSpeed()) * 1000));
 		}
 		return CompletableFuture.completedFuture(true);
 	}

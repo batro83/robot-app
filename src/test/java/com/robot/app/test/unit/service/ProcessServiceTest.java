@@ -40,12 +40,13 @@ public class ProcessServiceTest {
 
 	@Test
 	public void test001_process_ok() throws InterruptedException, JsonProcessingException {
+		when(robotConfig.getSpeed()).thenReturn(100f);
 		List<LatLng> mockList = new ArrayList<>();
 		mockList.add(new LatLng());
 		mockList.add(new LatLng());
 
 		when(routeService.getRouteLocationList(any())).thenReturn(mockList);
-		when(routeService.getDistanceBetweenPositions(any(), any())).thenReturn(101f);
+		when(routeService.getDistanceBetweenPositions(any(), any())).thenReturn(115f);
 
 		processService.process("polyline");
 
@@ -55,7 +56,7 @@ public class ProcessServiceTest {
 	@Test
 	public void test002_process_NoPositionList() throws InterruptedException, JsonProcessingException {
 		when(robotConfig.getMetersCollect()).thenReturn(100f);
-		when(robotConfig.getSpeed()).thenReturn(0f);
+		when(robotConfig.getSpeed()).thenReturn(1000f);
 		when(routeService.getRouteLocationList(any())).thenReturn(Collections.emptyList());
 		when(routeService.getDistanceBetweenPositions(any(), any())).thenReturn(101f);
 
