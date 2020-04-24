@@ -49,15 +49,29 @@ public class ReportServiceImpl implements ReportService {
 		List<Read> listToReport = getReadsToReport(lastReport.getLastReportSend());
 		if (!listToReport.isEmpty()) {
 			Read lastRead = listToReport.get(listToReport.size() - 1);
-
-			double avg = listToReport.stream().mapToDouble(Read::getLevel).average().getAsDouble();
-			ReportDto report = modelMapper.map(lastRead, ReportDto.class);
-			report.setLevel(getPollutionLevel(avg));
-			LOG.info(objectMapper.writeValueAsString(report));
-
+			generateReport(listToReport, lastRead, "robot");
 			lastReport.setLastReportSend(lastRead.getTimestamp());
 			saveLastReportSend(lastReport);
 		}
+	}
+
+	@Override
+	public void monitoringStationReport(String stationName) throws JsonProcessingException {
+		Report lastReport = getLastReportSend();
+		List<Read> listToReport = getReadsToReport(lastReport.getLastReportSend());
+		if (!listToReport.isEmpty()) {
+			Read lastRead = listToReport.get(listToReport.size() - 1);
+			generateReport(listToReport, lastRead, stationName);
+		}
+	}
+
+	private void generateReport(List<Read> listToReport, Read lastRead, String stationName)
+			throws JsonProcessingException {
+		double avg = listToReport.stream().mapToDouble(Read::getLevel).average().getAsDouble();
+		ReportDto report = modelMapper.map(lastRead, ReportDto.class);
+		report.setLevel(getPollutionLevel(avg));
+		report.setSource(stationName);
+		LOG.info(objectMapper.writeValueAsString(report));
 	}
 
 	private List<Read> getReadsToReport(Date lastReport) {

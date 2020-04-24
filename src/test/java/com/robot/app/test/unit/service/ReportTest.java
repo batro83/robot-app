@@ -69,4 +69,21 @@ public class ReportTest {
 
 		verify(reportDao, times(0)).save(any());
 	}
+	
+	@Test
+	public void test003_monitoringStationReport_ok() throws JsonProcessingException {
+		when(reportDao.findByRobotId(any())).thenReturn(Report.builder().build());
+
+		Read read1 = Read.builder().level(50d).timestamp(new Date()).build();
+		Read read2 = Read.builder().level(60d).timestamp(new Date()).build();
+		when(readService.getAllReads()).thenReturn(Arrays.asList(read1, read2));
+
+		LatLng location1 = new LatLng(1, 1);
+		ReportDto dto = ReportDto.builder().timestamp(new Date()).location(location1).build();
+		when(modelMapper.map(any(), any())).thenReturn(dto);
+
+		reportService.monitoringStationReport("station");
+
+		verify(reportDao, times(0)).save(any());
+	}
 }

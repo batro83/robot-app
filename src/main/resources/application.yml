@@ -1,13 +1,18 @@
 server:
    port: 8085
-   
 spring:
    data:
       mongodb:
          database: robot-pollution-data
          host: localhost
          port: 27017
-
 robot:
    speed: 1
-   meters-collect: 100 
+   meters-collect: 100
+   monitoring-stations:
+   -  lat: 51.501299
+      lng: -0.141935
+      name: Buckingham Palace
+   -  lat: 51.510852
+      lng: -0.114165
+      name: Temple Station

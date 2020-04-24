@@ -17,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.maps.model.LatLng;
 import com.robot.app.config.RobotConfig;
 import com.robot.app.model.Read;
@@ -38,7 +39,7 @@ public class ProcessServiceTest {
 	private ProcessServiceImpl processService;
 
 	@Test
-	public void test001_process_ok() throws InterruptedException {
+	public void test001_process_ok() throws InterruptedException, JsonProcessingException {
 		List<LatLng> mockList = new ArrayList<>();
 		mockList.add(new LatLng());
 		mockList.add(new LatLng());
@@ -52,7 +53,7 @@ public class ProcessServiceTest {
 	}
 
 	@Test
-	public void test002_process_NoPositionList() throws InterruptedException {
+	public void test002_process_NoPositionList() throws InterruptedException, JsonProcessingException {
 		when(robotConfig.getMetersCollect()).thenReturn(100f);
 		when(robotConfig.getSpeed()).thenReturn(0f);
 		when(routeService.getRouteLocationList(any())).thenReturn(Collections.emptyList());

@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.maps.model.LatLng;
 import com.robot.app.config.RobotConfig;
+import com.robot.app.config.model.MonitoringStations;
 import com.robot.app.model.Read;
 import com.robot.app.service.ProcessService;
 import com.robot.app.service.ReadService;
+import com.robot.app.service.ReportService;
 import com.robot.app.service.RouteService;
 
 /**
@@ -31,10 +34,12 @@ public class ProcessServiceImpl implements ProcessService {
 	private ReadService readService;
 	@Autowired
 	private RobotConfig robotConfig;
+	@Autowired
+	private ReportService reportService;
 
 	@Async("singleThreaded")
 	@Override
-	public CompletableFuture<Boolean> process(String polyline) throws InterruptedException {
+	public CompletableFuture<Boolean> process(String polyline) throws InterruptedException, JsonProcessingException {
 		float counterMeters = 0f;
 		List<LatLng> routeList = routeService.getRouteLocationList(polyline);
 		LatLng prevPosition = null;
@@ -42,6 +47,9 @@ public class ProcessServiceImpl implements ProcessService {
 			LatLng actualPosition = routeList.get(i);
 			float distance = routeService.getDistanceBetweenPositions(actualPosition, prevPosition);
 			counterMeters += distance;
+
+			checkMonitoringStations(actualPosition);
+
 			if (counterMeters >= robotConfig.getMetersCollect()) {
 				readService.saveRead(collectData(actualPosition));
 				counterMeters = 0f;
@@ -66,4 +74,15 @@ public class ProcessServiceImpl implements ProcessService {
 			.build();
 	}
 
+	private void checkMonitoringStations(LatLng actualPosition) throws JsonProcessingException {
+		List<MonitoringStations> stations = robotConfig.getMonitoringStations();
+
+		for (MonitoringStations station : stations) {
+			LatLng stationPosition = new LatLng(station.getLat(), station.getLng());
+			float distance = routeService.getDistanceBetweenPositions(actualPosition, stationPosition);
+			if (distance <= 100) {
+				reportService.monitoringStationReport(station.getName());
+			}
+		}
+	}
 }

@@ -9,7 +9,46 @@ There is and endpoint '/robot/start' to start the robot. With a valid polyline t
 Into the application.yml you can configure the robot such as speed(m/s) and distance(m) between each read.
 
 
-## Run with Docker-compose
+### Run with docker-compose
+
+In the root of the project run:
+
+```
+ ./gradlew bootJar
+ 
+ docker-compose up 
+```
+
+This will build and start one container for the rest api and another container with a mongoDb image.
+
+
+### Run with Docker
+
+In the root of the project build and run image:  
+
+```
+ ./gradlew bootJar
+
+ docker build -t robot-app .  
+ 
+ docker run -p 8085:8085 -d --net="host" -it robot-app
+```
+
+### Run tests
+
+To test the boot jar you must have a mongodb installed on your computer.
+In the root of the project run:
+
+```
+ ./gradlew test
+```
+
+
+### Swagger
+
+Once the application is started with docker-compose it can be tested with swagger:
+
+[http://localhost:8085/swagger-ui.html](http://localhost:8085/swagger-ui.html)
 
 
 ## Stack tech
@@ -19,6 +58,10 @@ Mongo
 JPA  
 
 ## Improving
+
+More unit test with monitoring stations.  
+More integration tests.  
+Finish endpoints /stop and /reroute (I'm out of time and this is a little bit trickie).  
 
 ### Reference Documentation
 For further reference, please consider the following sections:
