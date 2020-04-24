@@ -2,6 +2,7 @@
 
 Api rest to control robot collector.
 
+
 # Getting Started
 
 There is and endpoint '/robot/start' to start the robot. With a valid polyline the robot begins the route saving pollution reads into a mongoDB, and every 15 minutes the robot print the average level of pollution since the last print.
@@ -34,6 +35,7 @@ In the root of the project build and run image:
  docker run -p 8085:8085 -d --net="host" -it robot-app
 ```
 
+
 ### Run tests
 
 To test the boot jar you must have a mongodb installed on your computer.
@@ -56,12 +58,16 @@ Once the application is started with docker-compose it can be tested with swagge
 Springboot  
 Mongo  
 JPA  
+Lombok  
+
 
 ## Improving
 
 More unit test with monitoring stations.  
 More integration tests.  
 Finish endpoints /stop and /reroute (I'm out of time and this is a little bit trickie).  
+Send a better exception in case the polyline is invalid.  
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:
@@ -72,6 +78,7 @@ For further reference, please consider the following sections:
 * [Spring Data MongoDB](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-mongodb)
 * [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)
 
+
 ### Guides
 The following guides illustrate how to use some features concretely:
 
@@ -80,6 +87,7 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 * [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+
 
 ### Additional Links
 These additional references should also help you:

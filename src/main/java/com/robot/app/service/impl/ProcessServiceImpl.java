@@ -20,7 +20,7 @@ import com.robot.app.service.ReportService;
 import com.robot.app.service.RouteService;
 
 /**
- * Service to simulate the robot
+ * Service to simulate the robot process
  * 
  * @author batro
  *
